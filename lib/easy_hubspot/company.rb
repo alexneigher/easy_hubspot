@@ -11,7 +11,7 @@ module EasyHubspot
       end
 
       def find_by_name(name, access_token = nil)
-        Client.do_get("#{COMPANY_ENDPOINT}/#{name}?idProperty=email", headers(access_token))
+        Client.do_get("#{COMPANY_ENDPOINT}/#{name}?idProperty=name", headers(access_token))
       end
 
       def get_companies(access_token = nil)
