@@ -10,8 +10,21 @@ module EasyHubspot
         Client.do_get("#{COMPANY_ENDPOINT}/#{company_id}", headers(access_token))
       end
 
-      def find_by_name(name, access_token = nil)
-        Client.do_get("#{COMPANY_ENDPOINT}/#{name}?idProperty=name", headers(access_token))
+      def find_all_by_name(name, access_token = nil)
+        body = {
+          "filterGroups": [
+            {
+              "filters": [
+                {
+                  "propertyName": "name",
+                  "operator": "EQ",
+                  "value": name
+                }
+              ]
+            }
+          ]
+        }.to_json
+        Client.do_post("#{COMPANY_ENDPOINT}/search", body, headers(access_token))
       end
 
       def get_companies(access_token = nil)
